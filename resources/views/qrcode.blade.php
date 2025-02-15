@@ -1,11 +1,5 @@
 <x-app-layout>
 
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-12">
         <div class="p-6 bg-white rounded-xl space-y-4">
             <div class="mt-4">
@@ -21,13 +15,16 @@
                     {!! $qrCode !!}
                 </div>
 
-                <p class="font-medium break-all">{{ $fullUrl }}</p>
+                <p class="font-medium break-all mb-2">
+                    <strong>URL: </strong>
+                    {{ $fullUrl }}
+                </p>
 
-                <a href="{{ $fullUrl }}" target="_blank">
-                    <x-primary-button>
-                        Open Link
-                    </x-primary-button>
-                </a>
+                <x-link-button
+                    href="{{ $fullUrl }}"
+                    targetBlank="true">
+                    Open Link
+                </x-link-button>
             </div>
         </div>
     </div>

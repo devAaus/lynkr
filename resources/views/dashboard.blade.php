@@ -1,9 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -40,17 +35,26 @@
                             @foreach ($urls as $url)
                                 <div class="bg-gray-100 px-3 py-2 rounded-xl flex justify-between items-start">
                                     <div class="flex flex-col gap-2">
-                                        <a
-                                            href="{{ url($url->short_code) }}" target="_blank"
-                                            class="hover:underline">
-                                            {{ url($url->short_code) }}
-                                        </a>
-                                        <a href="{{ route('qrcode', $url->short_code) }}">
-                                            <x-primary-button>
-                                                QR Code
-                                            </x-primary-button>
-                                        </a>
+                                        <x-url :url="$url->long_url">
+                                            Original URL
+                                        </x-url>
+
+                                        <x-url url="{{ url($url->short_code) }}">
+                                            Shorten URL
+                                        </x-url>
+
+                                        <x-link-button
+                                            href="{{ url($url->short_code) }}"
+                                            targetBlank="true">
+                                            Open Link
+                                        </x-link-button>
+
+                                        <x-link-button
+                                            href="{{ route('qrcode', $url->short_code) }}">
+                                            📷 Generate QR
+                                        </x-link-button>
                                     </div>
+
                                     <span class="bg-gray-800 text-white font-semibold px-2 rounded-full">
                                         {{ $url->clicks }}
                                     </span>
