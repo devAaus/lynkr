@@ -26,4 +26,9 @@ class Url extends Model
             6
         );
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
