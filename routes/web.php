@@ -11,6 +11,8 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [UrlController::class, 'index'])->name('dashboard');
     Route::post('/shorten', [UrlController::class, 'store'])->name('shorten');
+
+    Route::get('/qrcode/{shortCode}', [UrlController::class, 'qrCode'])->name('qrcode');
 });
 
 Route::get('/{shortCode}', [UrlController::class, 'redirect'])->name('redirect');

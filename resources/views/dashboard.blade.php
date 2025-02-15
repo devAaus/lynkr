@@ -38,13 +38,20 @@
                     <div class="space-y-4">
                         @if (!empty($urls) && count($urls) > 0)
                             @foreach ($urls as $url)
-                                <div class="bg-gray-100 px-3 py-2 rounded-xl flex justify-between items-center">
-                                    <a
-                                        href="{{ url($url->short_code) }}" target="_blank"
-                                        class="hover:underline">
-                                        {{ url($url->short_code) }}
-                                    </a>
-                                    <span class="bg-white px-2 rounded-full">
+                                <div class="bg-gray-100 px-3 py-2 rounded-xl flex justify-between items-start">
+                                    <div class="flex flex-col gap-2">
+                                        <a
+                                            href="{{ url($url->short_code) }}" target="_blank"
+                                            class="hover:underline">
+                                            {{ url($url->short_code) }}
+                                        </a>
+                                        <a href="{{ route('qrcode', $url->short_code) }}">
+                                            <x-primary-button>
+                                                QR Code
+                                            </x-primary-button>
+                                        </a>
+                                    </div>
+                                    <span class="bg-gray-800 text-white font-semibold px-2 rounded-full">
                                         {{ $url->clicks }}
                                     </span>
                                 </div>

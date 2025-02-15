@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Url;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class UrlController extends Controller
 {
@@ -39,5 +40,15 @@ class UrlController extends Controller
         $url->increment('clicks');
 
         return redirect($url->long_url);
+    }
+
+    public function qrCode($shortCode)
+    {
+        $url = Url::where('short_code', $shortCode)->firstOrFail();
+        $fullUrl = url($url->short_code);
+
+        $qrCode = QrCode::size(200)->generate($fullUrl);
+
+        return view('qrcode', compact('qrCode', 'fullUrl'));
     }
 }
